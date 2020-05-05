@@ -34,9 +34,11 @@ class Shade():
                 self.ver_dir = -self.ver_dir
                 self.ch_ver_dir = True
             begin,end,ch = self.getParams(len(self.agendas[str(self.ver_dir)]),self.ver_dir)
-            for i in range(begin,end,ch):
-                self.shade_vert(self.agendas[str(self.ver_dir)].pop(i))
-    
+            if (len(self.agendas[str(self.ver_dir)])):
+                for i in range(begin,end,ch):
+                    self.shade_vert(self.agendas[str(self.ver_dir)][i]) #.pop(i))
+                    x = self.agendas[str(self.ver_dir)].pop(i)
+                    print (x)   
     def initialize_agendas(self):
         scan = Scan(self.origin, self.grid)
         self.lines = scan.main()
@@ -52,22 +54,17 @@ class Shade():
         agenda_temp = []
         begin,end,ch = self.getParams(len(shade_lines),self.ver_dir)
         for i in range(begin,end,ch):
-            if (ch == 1 and i > 0 and shade_lines[i][0] == shade_lines[i-1][0]):
-                agenda_temp.append(shade_lines[i])
-            elif (ch == -1 and i > 0 and shade_lines[i][0] == shade_lines[i-1][0]):
+            if (i > 0 and shade_lines[i][0] == shade_lines[i-1][0]):
                 agenda_temp.append(shade_lines[i])
             else:
-                if (ch == 1):
-                    self.shade_hor(shade_lines[i])
-                else:
-                    self.shade_hor(shade_lines[i])
+                self.shade_hor(shade_lines[i])
         if (len(agenda_temp)):
             if (ch == 1):
                 agenda_temp.reverse()
             self.agendas[str(self.ver_dir)].append(agenda_temp)
 
     def shade_hor(self,shade_line):
-        time.sleep(0.1)
+        time.sleep(0.2)
         for i in range(shade_line[1],shade_line[2]+1):
             point = self.grid.getGrid()[i][shade_line[0]]
             point.click(self.grid.screen, self.color_sel)
