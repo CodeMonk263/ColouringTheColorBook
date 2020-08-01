@@ -1,5 +1,3 @@
-# DRAWING PROGRAM BY TIM
-# main.py file (RUN THIS)
 # Description: This program draws a grid of 600, 600 with a given
 # pixel size/rows and cols. The user can then interact with the grid
 # using a variety of tools from the menu bar on the bottom. They can draw
@@ -42,25 +40,26 @@ wid = 600
 heigh = 600
 
 checked = []
-def fill(spot, grid, color, c):
-   if spot.color != c:
-      pass
-   else:
-      spot.click(grid.screen, color)
-      pygame.display.update()
-      
-      i = spot.col #the var i is responsible for denoting the current col value in the grid
-      j = spot.row #the var j is responsible for denoting the current row value in the grid
 
-      #Horizontal and vertical neighbors
-      if i < cols-1: #Right
-         fill(grid.getGrid()[i + 1][j], grid, color, c)
-      if i > 0: #Left
-         fill(grid.getGrid()[i - 1][j], grid, color, c)
-      if j < rows-1: #Up
-         fill(grid.getGrid()[i][j + 1], grid, color, c)
-      if j > 0 : #Down
-         fill(grid.getGrid()[i][j - 1], grid, color, c)
+# def fill(spot, grid, color, c):
+#    if spot.color != c:
+#       pass
+#    else:
+#       spot.click(grid.screen, color)
+#       pygame.display.update()
+      
+#       i = spot.col #the var i is responsible for denoting the current col value in the grid
+#       j = spot.row #the var j is responsible for denoting the current row value in the grid
+
+#       #Horizontal and vertical neighbors
+#       if i < cols-1: #Right
+#          fill(grid.getGrid()[i + 1][j], grid, color, c)
+#       if i > 0: #Left
+#          fill(grid.getGrid()[i - 1][j], grid, color, c)
+#       if j < rows-1: #Up
+#          fill(grid.getGrid()[i][j + 1], grid, color, c)
+#       if j > 0 : #Down
+#          fill(grid.getGrid()[i][j - 1], grid, color, c)
 
 
 # Saves the current project into a text file that contains the size of the screen, if the gird is showing and all the colors of all the pixels
@@ -246,8 +245,9 @@ def initalize(cols, rows, showGrid=False):
 
    pygame.display.update()
 
-#-----------------------------------------------------------------------#
-    #TKINTER FORM FOR GETTING INPUT#
+
+
+#TKINTER FORM FOR GETTING INPUT#
 window = Tk()
 window.title('Paint Program')
 
@@ -272,7 +272,6 @@ label.grid(row=0, pady=3)
 window.update()
 mainloop()
 
-#------------------------------------------------------------------------#
 
 
 #MAIN LOOP

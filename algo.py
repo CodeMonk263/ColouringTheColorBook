@@ -1,5 +1,6 @@
 class Scan():
-    def __init__(self,origin,grid):
+    ##Initializes all arrays and variables of class
+    def __init__(self,origin,grid):    
         self.origin = origin
         self.grid = grid
         self.set_grid = []
@@ -8,7 +9,8 @@ class Scan():
         self.lines = []
         self.count = 0
 
-    def initializeArrays(self):
+    ##Initializes the arrays according to the grid on screen
+    def initializeArrays(self):                      
         for j in range(len(self.grid.getGrid())):
             self.set_grid.append([])
             self.visited.append([])
@@ -20,7 +22,8 @@ class Scan():
                     self.set_grid[j].append(0)
                 self.visited[j].append(0)
 
-    def dfs(self,x,y):
+    ## DFS flood fill to detect all point to be coloured
+    def dfs(self,x,y):           
         ## x - column
         ## y - row
         if (0 <= x < len(self.set_grid) and 0 <= y < len(self.set_grid[0]) and self.visited[x][y] == 0 and self.set_grid[y][x] == 0):
@@ -32,19 +35,21 @@ class Scan():
             self.dfs(x,y+1)
             self.dfs(x,y-1)
 
-    def Sort(self,sub_li,index): 
+    ## Sorts the given array according to the given index of sub-array
+    def Sort(self,sub_li,index):          
     # reverse = None (Sorts in Ascending order) 
     # key is set to sort using second element of  
     # sublist lambda has been used 
         sub_li.sort(key = lambda x: x[index]) 
         return sub_li 
 
-    def main(self):
+    ## Main function to return list of lines to be coloured sorted by height and the left and right extreme coordinates
+    def main(self):                       
         self.initializeArrays()
         self.dfs(self.origin.col,self.origin.row)
         self.points = self.Sort(self.points,1)
         self.points = self.Sort(self.points,0)
-        l,right,left,height = 0,0,0,0
+        right, left, height = 0,0,0
         first_pt = True
         for i in range(self.count):
             if (first_pt):
@@ -62,10 +67,6 @@ class Scan():
 
             if (i == self.count-1):
                 self.lines.append([height,left,right])
-        
-        # for x in self.lines:
-        #     print (x)
-        # print ('\n')
 
         return self.lines
 
